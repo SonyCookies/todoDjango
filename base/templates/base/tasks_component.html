@@ -1,0 +1,48 @@
+{% for task in tasks %}
+
+<div class="roomListRoom">
+  <div class="roomListRoom__header">
+    <span class="roomListRoom__author">{{task.created|timesince}} ago</span>
+    <div class="roomListRoom__actions">
+      <a href="{% url 'delete-task' task.id %}">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 28 28"
+        >
+          <title>remove</title>
+          <path
+            d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
+          ></path>
+        </svg>
+      </a>
+      <a href="{% url 'done-task' task.id %}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="40" height="40" fill="green" style="fill: var(--color-main);">
+          <title>mark as done</title>
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="roomListRoom__content">
+    <a href="{% url 'update-task' task.id %}">{{task.title}}</a>
+  </div>
+  <div class="roomListRoom__meta">
+    <a class="roomListRoom__joined">
+      {% if task.priority == '1' %} 
+        HIGH
+      {% elif task.priority == '2' %} 
+        MEDIUM
+      {% elif task.priority == '3' %} 
+        LOW
+      {% else %} 
+        NOTWORKING
+      {% endif %}
+    </a>
+    <a href="{% url 'index' %}?q={{task.category.name}}" class="roomListRoom__topic">{{task.category.name}}</a>
+  </div>
+</div>
+
+{% endfor %}

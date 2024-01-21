@@ -1,0 +1,33 @@
+<div class="activities">
+  <div class="activities__header">
+    <h2>Finished Tasks</h2>
+  </div>
+  {% for task in tasks_completed %}
+  <div class="activities__box">
+    <div class="activities__boxHeader roomListRoom__header">
+      <p><span>{{task.updated|timesince}} ago</span></p>
+      <div class="roomListRoom__actions">
+        <a href="{% url 'delete-task' task.id %}">
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 28 28"
+          >
+            <title>remove</title>
+            <path
+              d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="activities__boxContent">
+      <div class="activities__boxRoomContent">{{task.title}}</div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
